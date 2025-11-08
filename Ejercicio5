@@ -1,0 +1,16 @@
+const fs = require('fs');
+
+const [,, origen, destino] = process.argv;
+
+if (!origen || !destino) {
+  console.log("Uso: node copiarArchivo.js origen.txt destino.txt");
+  process.exit(1);
+}
+
+if (!fs.existsSync(origen)) {
+  console.log(`Error: El archivo ${origen} no existe.`);
+  process.exit(1);
+}
+
+fs.copyFileSync(origen, destino);
+console.log(`Archivo copiado de ${origen} a ${destino} con éxito.`);
