@@ -1,0 +1,16 @@
+const fs = require('fs');
+
+function obtenerFechaHora() {
+  const ahora = new Date();
+  const fecha = ahora.toISOString().replace('T', ' ').split('.')[0];
+  return `[${fecha}]`;
+}
+
+fs.appendFileSync('log.txt', `${obtenerFechaHora()} - Inicio del programa\n`);
+
+fs.appendFileSync('log.txt', `${obtenerFechaHora()} - Ejecutando tarea...\n`);
+
+setTimeout(() => {
+  fs.appendFileSync('log.txt', `${obtenerFechaHora()} - Tarea completada\n`);
+  console.log("Tarea completada");
+}, 5000);
