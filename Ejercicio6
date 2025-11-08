@@ -1,0 +1,23 @@
+const fs = require('fs');
+const path = require('path');
+
+const dir = './logs';
+const archivo = path.join(dir, 'app.log');
+
+if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+
+function obtenerFecha() {
+  return new Date().toISOString().replace('T', ' ').split('.')[0];
+}
+
+fs.appendFileSync(archivo, `[${obtenerFecha()}] - Ejecución exitosa\n`);
+console.log("Registro agregado a app.log");
+
+function mostrarUltimasEjecuciones() {
+  const lineas = fs.readFileSync(archivo, 'utf8').trim().split('\n');
+  const ultimas = lineas.slice(-5);
+  console.log("Últimas 5 ejecuciones:");
+  console.log(ultimas.join('\n'));
+}
+
+mostrarUltimasEjecuciones();
