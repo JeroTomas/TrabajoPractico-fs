@@ -1,0 +1,14 @@
+const fs = require('fs');
+
+const [,, archivo, palabra] = process.argv;
+
+if (!archivo || !palabra) {
+  console.log("Uso: node contadorPalabras.js archivo.txt palabra");
+  process.exit(1);
+}
+
+const contenido = fs.readFileSync(archivo, 'utf8');
+const regex = new RegExp(`\\b${palabra}\\b`, 'gi');
+const cantidad = (contenido.match(regex) || []).length;
+
+console.log(`La palabra "${palabra}" aparece ${cantidad} veces en el archivo "${archivo}".`);
